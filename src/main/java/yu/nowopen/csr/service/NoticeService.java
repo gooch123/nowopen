@@ -31,7 +31,7 @@ public class NoticeService {
         noticeRepository.deleteById(noticeId);
     }
 
-    public void updateNotice(UpdateNoticeReq req) {
+    public void updateNotice(UpdateNoticeReq req) throws NotFoundRecordException {
         Notice findNotice = noticeRepository.findById(req.noticeId()).orElseThrow(NotFoundRecordException::new);
         findNotice.update(req.noticeTitle(),req.noticeBody(), LocalDateTime.now());
     }

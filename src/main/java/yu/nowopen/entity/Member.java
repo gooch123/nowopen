@@ -1,15 +1,17 @@
 package yu.nowopen.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import yu.nowopen.enumrate.MemberType;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id @GeneratedValue
+    @Column(name = "member_id")
     Long id;
     String memberId;
     String pwd;

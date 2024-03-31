@@ -1,6 +1,6 @@
 package yu.nowopen.exception;
 
-public class NotFoundRecordException extends RuntimeException {
+public class NotFoundRecordException extends Exception {
 
 
 

@@ -1,24 +1,25 @@
 package yu.nowopen.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Notice {
 
     @Id @GeneratedValue
+    @Column(name = "notice_id")
     Long id;
     LocalDateTime time;
     String title;
     String body;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
     Store store;
 
     public Notice(LocalDateTime time, String title, String body, Store store) {

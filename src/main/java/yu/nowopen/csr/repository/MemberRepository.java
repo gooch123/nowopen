@@ -5,4 +5,5 @@ import yu.nowopen.entity.Member;
 
 public interface MemberRepository extends JpaRepository<Member,Long> {
 
+    Boolean existsMemberByMemberId(String memberId);
 }

@@ -17,14 +17,14 @@ public class StoreService {
                 req.storeName(),
                 req.openTime(),
                 req.closeTime(),
-                req.storeStatus()
+                req.owner()
         );
 
         storeRepository.save(store);
     }
 
-    public void delete(Store deleteStore) {
-        storeRepository.delete(deleteStore);
+    public void delete(Long storeId) {
+        storeRepository.deleteById(storeId);
     }
 
 }
