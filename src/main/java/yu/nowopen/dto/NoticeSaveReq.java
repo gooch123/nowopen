@@ -8,6 +8,6 @@ public record NoticeSaveReq(
         LocalDateTime time,
         String title,
         String body,
-        Store store
+        Long storeId
 ) {
 }

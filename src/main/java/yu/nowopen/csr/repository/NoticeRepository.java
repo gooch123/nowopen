@@ -5,7 +5,7 @@ import yu.nowopen.entity.Notice;
 
 import java.util.List;
 
-public interface NoticeRepository extends JpaRepository<Notice,Long> {
+public interface NoticeRepository extends JpaRepository<Notice,Long>, NoticeRepositoryCustom {
 
 
 }

@@ -14,7 +14,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public void saveMember(MemberSaveReq memberSaveReq) throws DuplicateMemberIdException {
-        if (memberRepository.existsMemberByMemberId(memberSaveReq.id())) {
+        if (memberRepository.existsMemberByUseId(memberSaveReq.id())) {
             throw new DuplicateMemberIdException();
         }else {
             Member member = memberSaveReq.toEntity();

@@ -10,17 +10,17 @@ import yu.nowopen.enumrate.MemberType;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     Long id;
-    String memberId;
+    String useId;
     String pwd;
     @Enumerated(EnumType.STRING)
     MemberType type;
 
     @Builder
-    public Member(String memberId, String pwd, MemberType type) {
-        this.memberId = memberId;
+    public Member(String useId, String pwd, MemberType type) {
+        this.useId = useId;
         this.pwd = pwd;
         this.type = type;
     }

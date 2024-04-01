@@ -3,13 +3,16 @@ package yu.nowopen.csr.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.*;
+import yu.nowopen.csr.repository.NoticeRepository;
 import yu.nowopen.csr.service.NoticeService;
+import yu.nowopen.dto.NoticeInquiryRes;
 import yu.nowopen.dto.NoticeSaveReq;
 import yu.nowopen.dto.UpdateNoticeReq;
 import yu.nowopen.exception.NotFoundRecordException;
 
-import java.awt.print.Pageable;
 import java.time.LocalDateTime;
 
 @RestController
@@ -17,6 +20,7 @@ import java.time.LocalDateTime;
 public class NoticeController {
 
     private final NoticeService noticeService;
+    private final NoticeRepository noticeRepository;
 
     @PostMapping("/notice/save")
     public void save(@RequestBody NoticeSaveReq req) {
@@ -41,8 +45,8 @@ public class NoticeController {
     }
 
     @GetMapping("/notice")
-    public void getNotice(@RequestParam Long storeId, Pageable pageable){
-
+    public Slice<NoticeInquiryRes> getNotice(@RequestParam Long storeId, Pageable pageable){
+        return noticeRepository.getNoticeSlice(storeId,pageable);
     }
 
     @Setter

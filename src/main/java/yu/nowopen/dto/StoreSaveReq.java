@@ -3,11 +3,13 @@ package yu.nowopen.dto;
 import yu.nowopen.entity.Member;
 import yu.nowopen.enumrate.StoreStatus;
 
+import java.time.LocalDateTime;
+
 public record StoreSaveReq(
 
         String storeName,
-        String openTime,
-        String closeTime,
+        LocalDateTime openTime,
+        LocalDateTime closeTime,
         Member owner
 ) {
 

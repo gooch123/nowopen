@@ -19,7 +19,7 @@ public record MemberSaveReq(
 
     public Member toEntity() {
         return Member.builder()
-                .memberId(id())
+                .useId(id())
                 .pwd(pwd())
                 .type(memberType())
                 .build();

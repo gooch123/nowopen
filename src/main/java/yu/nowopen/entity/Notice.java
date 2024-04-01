@@ -2,7 +2,9 @@ package yu.nowopen.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -11,9 +13,11 @@ import java.time.LocalTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Notice {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "notice_id")
     Long id;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     LocalDateTime time;
     String title;
     String body;
@@ -22,6 +26,7 @@ public class Notice {
     @JoinColumn(name = "store_id")
     Store store;
 
+    @Builder
     public Notice(LocalDateTime time, String title, String body, Store store) {
         this.time = time;
         this.title = title;
@@ -32,7 +37,7 @@ public class Notice {
     public void update(String title, String body, LocalDateTime updateTime) {
         this.title = title;
         this.body = body;
-        this.time = time;
+        this.time = updateTime;
     }
 
 }
