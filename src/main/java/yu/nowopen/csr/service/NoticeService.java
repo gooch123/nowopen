@@ -2,12 +2,13 @@ package yu.nowopen.csr.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import yu.nowopen.csr.repository.NoticeRepository;
 import yu.nowopen.csr.repository.StoreRepository;
 import yu.nowopen.dto.NoticeSaveReq;
 import yu.nowopen.dto.UpdateNoticeReq;
 import yu.nowopen.entity.Notice;
-import yu.nowopen.exception.NotFoundRecordException;
+import yu.nowopen.exception.NotFoundNoticeException;
 
 import java.time.LocalDateTime;
 
@@ -32,9 +33,11 @@ public class NoticeService {
         noticeRepository.deleteById(noticeId);
     }
 
-    public void updateNotice(UpdateNoticeReq req) throws NotFoundRecordException {
-        Notice findNotice = noticeRepository.findById(req.noticeId()).orElseThrow(NotFoundRecordException::new);
+    @Transactional
+    public void updateNotice(UpdateNoticeReq req) throws NotFoundNoticeException {
+        Notice findNotice = noticeRepository.findById(req.noticeId()).orElseThrow(NotFoundNoticeException::new);
         findNotice.update(req.noticeTitle(),req.noticeBody(), LocalDateTime.now());
+        System.out.println("findNotice = " + findNotice);
     }
 
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalTime;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class Notice {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

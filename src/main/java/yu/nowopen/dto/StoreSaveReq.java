@@ -10,7 +10,7 @@ public record StoreSaveReq(
         String storeName,
         LocalDateTime openTime,
         LocalDateTime closeTime,
-        Member owner
+        Long memberId
 ) {
 
 }

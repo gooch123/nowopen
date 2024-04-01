@@ -1,6 +1,7 @@
 package yu.nowopen.csr.controller;
 
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.domain.Pageable;
@@ -11,9 +12,7 @@ import yu.nowopen.csr.service.NoticeService;
 import yu.nowopen.dto.NoticeInquiryRes;
 import yu.nowopen.dto.NoticeSaveReq;
 import yu.nowopen.dto.UpdateNoticeReq;
-import yu.nowopen.exception.NotFoundRecordException;
-
-import java.time.LocalDateTime;
+import yu.nowopen.exception.NotFoundNoticeException;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,7 +35,7 @@ public class NoticeController {
             noticeService.updateNotice(req);
             updateRes.setIsValidNotice(true);
             updateRes.setNoticeId(req.noticeId());
-        } catch (NotFoundRecordException e) {
+        } catch (NotFoundNoticeException e) {
             updateRes.setIsValidNotice(false);
             updateRes.setException(e);
         }
@@ -50,6 +49,7 @@ public class NoticeController {
     }
 
     @Setter
+    @Getter
     static class UpdateRes{
 
         private Exception exception;
