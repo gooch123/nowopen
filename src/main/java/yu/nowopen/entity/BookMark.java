@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class BookMark {
+public class BookMark extends TimeBase {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bookmark_id")

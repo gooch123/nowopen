@@ -19,9 +19,8 @@ public record MemberSaveReq(
 
     public Member toEntity() {
         return Member.builder()
-                .useId(id())
-                .pwd(pwd())
-                .type(memberType())
+                .username(id())
+                .password(pwd())
                 .build();
     }
 }

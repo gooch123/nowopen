@@ -6,17 +6,18 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Getter
-public class NoticeInquiryRes {
-
-    private String title;
-    private String body;
-    private LocalDateTime time;
+public record NoticeInquiryRes(
+        String title,
+        String body,
+        LocalDateTime createTime,
+        LocalDateTime LastModifiedTime
+) {
 
     @QueryProjection
-    public NoticeInquiryRes(String title, String body, LocalDateTime time) {
+    public NoticeInquiryRes(String title, String body, LocalDateTime createTime, LocalDateTime LastModifiedTime) {
         this.title = title;
         this.body = body;
-        this.time = time;
+        this.createTime = createTime;
+        this.LastModifiedTime = LastModifiedTime;
     }
 }

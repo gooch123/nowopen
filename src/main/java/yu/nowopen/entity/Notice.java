@@ -13,14 +13,12 @@ import java.time.LocalTime;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class Notice {
+public class Notice extends TimeBase{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "notice_id")
     Long id;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    LocalDateTime time;
     String title;
     String body;
 
@@ -29,17 +27,15 @@ public class Notice {
     Store store;
 
     @Builder
-    public Notice(LocalDateTime time, String title, String body, Store store) {
-        this.time = time;
+    public Notice(String title, String body, Store store) {
         this.title = title;
         this.body = body;
         this.store = store;
     }
 
-    public void update(String title, String body, LocalDateTime updateTime) {
+    public void update(String title, String body) {
         this.title = title;
         this.body = body;
-        this.time = updateTime;
     }
 
 }

@@ -3,25 +3,25 @@ package yu.nowopen.entity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import yu.nowopen.enumrate.MemberType;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends TimeBase{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     Long id;
-    String useId;
-    String pwd;
-    @Enumerated(EnumType.STRING)
-    MemberType type;
+    String username;
+    String password;
 
     @Builder
-    public Member(String useId, String pwd, MemberType type) {
-        this.useId = useId;
-        this.pwd = pwd;
-        this.type = type;
+    public Member(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
+
 }

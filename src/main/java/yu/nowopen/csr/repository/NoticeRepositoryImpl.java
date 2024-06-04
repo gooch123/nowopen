@@ -30,7 +30,8 @@ public class NoticeRepositoryImpl implements NoticeRepositoryCustom{
                 .select(new QNoticeInquiryRes(
                         notice.title,
                         notice.body,
-                        notice.time
+                        notice.createTime,
+                        notice.lastModifiedTime
                 ))
                 .from(notice)
                 .leftJoin(notice.store ,store)
