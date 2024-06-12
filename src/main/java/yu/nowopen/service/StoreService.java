@@ -1,26 +1,26 @@
-package yu.nowopen.csr.service;
+package yu.nowopen.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import yu.nowopen.csr.repository.MemberRepository;
-import yu.nowopen.csr.repository.StoreRepository;
+import yu.nowopen.repository.BookMarkRepository;
+import yu.nowopen.repository.MemberRepository;
+import yu.nowopen.repository.StoreRepository;
 import yu.nowopen.dto.*;
 import yu.nowopen.entity.Member;
 import yu.nowopen.entity.Store;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class StoreService {
 
     private final StoreRepository storeRepository;
-    private final MemberRepository memberRepository;
+    private final BookMarkRepository bookMarkRepository;
 
     public Store save(CreateStoreReq req, Member owner) {
         Store store = new Store(
@@ -38,7 +38,7 @@ public class StoreService {
     }
 
     @Transactional
-    public SliceResult<StoreSearchRes> search(Pageable pageable, StoreSearchCondition cond) {
+    public SliceResult<StoreSearchRes> search(Pageable pageable, StoreSearchCondition cond, String deviceId) {
          Slice<Store> stores = storeRepository.findAllByStoreNameContains(cond.storeName(), pageable);
         ArrayList<StoreSearchRes> storeSearchRes = new ArrayList<>();
         for (Store value : stores.getContent()) {
@@ -46,7 +46,8 @@ public class StoreService {
                     value.getId(),
                     value.getStoreName(),
                     value.getOpenTime(),
-                    value.getCloseTime()
+                    value.getCloseTime(),
+                    bookMarkRepository.existsByStoreAndDeviceId(value, deviceId)
             ));
         }
         return new SliceResult<>(

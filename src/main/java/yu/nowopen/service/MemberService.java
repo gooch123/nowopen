@@ -1,9 +1,9 @@
-package yu.nowopen.csr.service;
+package yu.nowopen.service;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import yu.nowopen.csr.repository.MemberRepository;
+import yu.nowopen.repository.MemberRepository;
 import yu.nowopen.dto.MemberSaveReq;
 import yu.nowopen.entity.Member;
 import yu.nowopen.exception.DuplicateMemberIdException;
@@ -14,12 +14,12 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public void saveMember(MemberSaveReq memberSaveReq) {
-        if (memberRepository.existsMemberByUsername(memberSaveReq.id())) {
+    public Member saveMember(MemberSaveReq memberSaveReq) {
+        if (memberRepository.existsMemberByUsername(memberSaveReq.username())) {
             throw new DuplicateMemberIdException();
         }else {
             Member member = memberSaveReq.toEntity();
-            memberRepository.save(member);
+            return memberRepository.save(member);
         }
     }
 

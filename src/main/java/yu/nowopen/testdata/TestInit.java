@@ -1,18 +1,16 @@
 package yu.nowopen.testdata;
 
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.cglib.core.Local;
 import org.springframework.context.event.EventListener;
-import yu.nowopen.csr.repository.MemberRepository;
-import yu.nowopen.csr.repository.NoticeRepository;
-import yu.nowopen.csr.repository.StoreRepository;
+import yu.nowopen.repository.MemberRepository;
+import yu.nowopen.repository.NoticeRepository;
+import yu.nowopen.repository.StoreRepository;
 import yu.nowopen.entity.Member;
 import yu.nowopen.entity.Notice;
 import yu.nowopen.entity.Store;
-import yu.nowopen.enumrate.MemberType;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @RequiredArgsConstructor
@@ -32,10 +30,22 @@ public class TestInit {
         );
         memberRepository.save(member);
 
+        Member member2 = new Member(
+                "test",
+                "0000"
+        );
+        memberRepository.save(member2);
+
+        Member member3 = new Member(
+                "test2",
+                "0000"
+        );
+        memberRepository.save(member3);
+
         Store store = new Store(
                 "영남대 가게",
-                LocalTime.now(),
-                LocalTime.now(),
+                LocalTime.of(9,0),
+                LocalTime.of(23,0),
                 member
         );
         storeRepository.save(store);

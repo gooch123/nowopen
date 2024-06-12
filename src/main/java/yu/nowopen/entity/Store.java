@@ -1,5 +1,6 @@
 package yu.nowopen.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,8 +22,10 @@ public class Store extends TimeBase {
     Long id;
     String storeName;
     @DateTimeFormat(pattern = "'T'HH:mm")
+    @JsonFormat(pattern = "HH:mm")
     LocalTime openTime;
     @DateTimeFormat(pattern = "'T'HH:mm")
+    @JsonFormat(pattern = "HH:mm")
     LocalTime closeTime;
 
     @OneToOne

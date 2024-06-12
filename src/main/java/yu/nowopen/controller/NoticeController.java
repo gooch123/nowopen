@@ -1,15 +1,13 @@
-package yu.nowopen.csr.controller;
+package yu.nowopen.controller;
 
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.*;
-import yu.nowopen.csr.repository.NoticeRepository;
-import yu.nowopen.csr.service.NoticeService;
+import yu.nowopen.repository.NoticeRepository;
+import yu.nowopen.service.NoticeService;
 import yu.nowopen.dto.NoticeInquiryRes;
 import yu.nowopen.dto.NoticeSaveReq;
 import yu.nowopen.dto.SliceResult;
@@ -23,7 +21,6 @@ import yu.nowopen.exception.NotFoundNoticeException;
 public class NoticeController {
 
     private final NoticeService noticeService;
-    private final NoticeRepository noticeRepository;
 
     @PostMapping("/save")
     public void save(@RequestBody NoticeSaveReq req) {
@@ -47,9 +44,9 @@ public class NoticeController {
         return updateRes;
     }
 
-    @PostMapping("/delete")
-    public void delete(@RequestBody Long noticeId) {
-        noticeService.deleteNotice(noticeId);
+    @PostMapping("/delete/{id}")
+    public void delete(@PathVariable Long id) {
+        noticeService.deleteNotice(id);
     }
 
 

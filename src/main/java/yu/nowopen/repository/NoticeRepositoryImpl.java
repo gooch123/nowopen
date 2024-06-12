@@ -1,4 +1,4 @@
-package yu.nowopen.csr.repository;
+package yu.nowopen.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -7,10 +7,6 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
 import yu.nowopen.dto.NoticeInquiryRes;
 import yu.nowopen.dto.QNoticeInquiryRes;
-import yu.nowopen.entity.QMember;
-import yu.nowopen.entity.QNotice;
-import yu.nowopen.entity.QStore;
-import yu.nowopen.entity.Store;
 
 import java.util.List;
 
@@ -28,6 +24,7 @@ public class NoticeRepositoryImpl implements NoticeRepositoryCustom{
 
         List<NoticeInquiryRes> content = queryFactory
                 .select(new QNoticeInquiryRes(
+                        notice.id,
                         notice.title,
                         notice.body,
                         notice.createTime,

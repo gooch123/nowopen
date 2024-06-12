@@ -2,11 +2,13 @@ package yu.nowopen.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BookMark extends TimeBase {
 
@@ -14,16 +16,14 @@ public class BookMark extends TimeBase {
     @Column(name = "bookmark_id")
     Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    Member member;
+    String deviceId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     Store store;
 
-    public BookMark(Member member, Store store) {
-        this.member = member;
+    public BookMark(String deviceId, Store store) {
+        this.deviceId = deviceId;
         this.store = store;
     }
 }

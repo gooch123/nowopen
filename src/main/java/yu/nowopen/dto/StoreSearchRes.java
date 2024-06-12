@@ -10,7 +10,8 @@ public record StoreSearchRes(
         Long id,
         String storeName,
         LocalTime openTime,
-        LocalTime closeTime
+        LocalTime closeTime,
+        boolean isBookmarked
 ) {
 
 }

@@ -1,15 +1,14 @@
-package yu.nowopen.csr.controller;
+package yu.nowopen.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import yu.nowopen.csr.service.MemberService;
+import yu.nowopen.service.MemberService;
 import yu.nowopen.dto.*;
 import yu.nowopen.entity.Member;
-import yu.nowopen.entity.Notice;
-import yu.nowopen.exception.DuplicateMemberIdException;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,9 +18,9 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/join")
-    public MemberSaveRes join(@RequestBody MemberSaveReq memberSaveReq) {
-        memberService.saveMember(memberSaveReq);
-        return new MemberSaveRes("회원가입 성공");
+    public ResponseEntity<?> join(@RequestBody MemberSaveReq memberSaveReq) {
+        Member member = memberService.saveMember(memberSaveReq);
+        return new ResponseEntity<>(new CreatedRes(member.getId()), HttpStatus.OK);
     }
 
     @PostMapping("/login")

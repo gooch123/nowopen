@@ -1,23 +1,23 @@
 package yu.nowopen.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 public record NoticeInquiryRes(
+        Long id,
         String title,
         String body,
         LocalDateTime createTime,
-        LocalDateTime LastModifiedTime
+        LocalDateTime lastModifiedTime
 ) {
 
     @QueryProjection
-    public NoticeInquiryRes(String title, String body, LocalDateTime createTime, LocalDateTime LastModifiedTime) {
+    public NoticeInquiryRes(Long id, String title, String body, LocalDateTime createTime, LocalDateTime lastModifiedTime) {
+        this.id = id;
         this.title = title;
         this.body = body;
         this.createTime = createTime;
-        this.LastModifiedTime = LastModifiedTime;
+        this.lastModifiedTime = lastModifiedTime;
     }
 }
